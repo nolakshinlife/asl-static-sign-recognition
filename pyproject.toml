@@ -1,0 +1,25 @@
+# Lets us run "pip install -e ." so that "import asl_recognition" works
+# from anywhere, and configures pytest to find the code in src/.
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "asl-static-sign-recognition"
+version = "0.1.0"
+description = "Webcam-based recognition of static ASL alphabet signs using MediaPipe landmarks and scikit-learn."
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+dynamic = ["dependencies"]
+
+[tool.setuptools.dynamic]
+dependencies = { file = ["requirements.txt"] }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+# Lets "pytest" work even if the package has not been installed with pip.
+pythonpath = ["src"]
+testpaths = ["tests"]
